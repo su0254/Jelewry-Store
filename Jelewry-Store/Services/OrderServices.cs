@@ -4,6 +4,7 @@ namespace Jelewry_Store.Services
 {
     public class OrderServices
     {
+        static int id = 1;
         static List<Order> orders = new List<Order>();
 
         public List<Order> GetAllOrders()
@@ -19,17 +20,26 @@ namespace Jelewry_Store.Services
             }
             return null;
         }
-        public void AddOrder(Order order)
+        public bool AddOrder(Order order)
         {
+            if (order == null) return false;
+            order.Id = id++;
             orders.Add(order);
+            return true;
         }
-        public void PutOrder(int orderCode, Order order)
+        public bool PutOrder(int orderCode, Order order)
         {
-            for (int i = 0; i < orders.Count; i++)
-            {
-                if (orders[i].OrderCode == orderCode)
-                    orders[i] = order;
-            }
+            if (order == null) return false;
+           Order o=orders.Find(o=>o.OrderCode == orderCode);
+            o.UserId = order.UserId;
+            o.OrderDate = order.OrderDate;
+            o.IsExsist = order.IsExsist;
+            o.TotalPrice = order.TotalPrice;
+            o.EspaicelDemand = order.EspaicelDemand;
+            o.ESortOfSending = order.ESortOfSending;
+            o.NumOfItemInOrder = order.NumOfItemInOrder;
+            return true;
+            
         }
         public void DeleteOrder(int orderCode)
         {

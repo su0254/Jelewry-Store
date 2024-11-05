@@ -5,6 +5,7 @@ namespace Jelewry_Store.Services
 {
     public class UserServices
     {
+        static int id = 1;
         static List<User> Users { get; }
         public UserServices()
         {
@@ -13,19 +14,17 @@ namespace Jelewry_Store.Services
         static UserServices()
         {
             Users = new List<User>();
-            Users.Add(new User(2, "123", "sari", "gdf@", "0527600254", "bney brak", "jerusalem 47", "12345", new DateTime()));
-            Users.Add(new User(1, "123", "hadasa", "gdf@", "0527600254", "bney brak", "jerusalem 47", "12345", new DateTime()));
         }
         public List<User> GetAllUser()
         {
             return Users;
         }
 
-        public User GetUserById(string id)
+        public User GetUserById(string tz)
         {
             foreach (var user in Users)
             {
-                if (user.Id == id)
+                if (user.Tz == tz)
                     return user;
             }
             return null;
@@ -33,14 +32,15 @@ namespace Jelewry_Store.Services
 
         public void PostUser(User user)
         {
+            user.Id = id++;
             Users.Add(user);
         }
 
-        public void PutUser(string id, User u)
+        public void PutUser(string tz, User u)
         {
             for (int i = 0; i < Users.Count(); i++)
             {
-                if (Users[i].Id == id)
+                if (Users[i].Tz == tz)
                 {
                     Users[i] = u;
                     return;
@@ -48,11 +48,11 @@ namespace Jelewry_Store.Services
             }
         }
 
-        public void DeleteUser(string id)
+        public void DeleteUser(string tz)
         {
             foreach (var user in Users)
             {
-                if (user.Id == id)
+                if (user.Tz == tz)
                 {
                     Users.Remove(user);
                     return;

@@ -2,6 +2,8 @@
 {
     public class Branch
     {
+        public static int id = 0;
+        public int Id { get; set; }
         public int CodeBranch { get; set; }
         public int CodeManager { get; set; }
         public string Adress { get; set; }

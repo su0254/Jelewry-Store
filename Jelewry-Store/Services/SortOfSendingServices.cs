@@ -4,6 +4,8 @@ namespace Jelewry_Store.Services
 {
     public class SortOfSendingServices
     {
+
+        static int id = 1;
         static List<SortOfSending> sortsOfSending = new List<SortOfSending>();
 
         public List<SortOfSending> GetAllSendings()
@@ -21,6 +23,7 @@ namespace Jelewry_Store.Services
         }
         public void AddSending(SortOfSending sending)
         {
+            sending.Id = id++;
             sortsOfSending.Add(sending);
         }
         public void PutSending(int sendingCode, SortOfSending sending)

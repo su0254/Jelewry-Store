@@ -4,8 +4,8 @@ namespace Jelewry_Store.Entities
     public enum Status { WORKER, CLIENT, MANEGER }
     public class User
     {
-        public int Code { get; set; }
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string Tz { get; set; }
         public string Name { get; set; }
         public string? Email { get; set; }
         public string PhoneNumber { get; set; }

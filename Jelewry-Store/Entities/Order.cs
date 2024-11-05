@@ -4,6 +4,8 @@
     public enum SortsOfSending { BYSHOP, BYHOME, EXPRESE }
     public class Order
     {
+        static int id = 1;
+        public int Id { get; set; }
         public int OrderCode { get; set; }
         public int UserId { get; set; }
         public double TotalPrice { get; set; }
@@ -12,6 +14,6 @@
         public SpaicelDemand EspaicelDemand { get; set; }
         public int NumOfItemInOrder { get; set; }
         public SortsOfSending ESortOfSending { get; set; }
-        public List<Product> ProductsInOrder { get; set; }
+        //public List<Product> ProductsInOrder { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace Jelewry_Store.Controllers
             Branch s = branchServices.GetBranchByCode(codeBranch);
             if (s == null)
                 return NotFound();
-            branchServices.PutBranch(codeBranch, s);
+            branchServices.PutBranch(codeBranch, branch);
             return Ok();
         }
 

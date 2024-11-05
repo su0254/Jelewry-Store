@@ -4,6 +4,7 @@ namespace Jelewry_Store.Services
 {
     public class ProductServices
     {
+        static int id = 1;
         static List<Product> products { get; }
         public ProductServices()
         {
@@ -26,25 +27,30 @@ namespace Jelewry_Store.Services
             }
             return null;
         }
-        public void PostProduct(Product p)
+        public bool PostProduct(Product p)
         {
+            if (p == null) return false;
+            p.Id = id++;
             products.Add(p);
+            return true;
         }
-        public void PutProduct(string makat,Product p)
+        public bool PutProduct(string makat,Product p)
         {
-            for (int i = 0; i < products.Count(); i++)
-            {
-                if(p.Makat == makat)
-                    products[i] = p;
-            }
+            if (p == null) return false;
+            Product product = products.Find(p => p.Makat==makat);
+            product.Makat = p.Makat;
+            product.Description = p.Description;
+            product.Price = p.Price;
+            product.Color = p.Color;
+            product.Qty = p.Qty;
+            product.EKategory = p.EKategory;
+            product.ETarget = p.ETarget;
+            return true;
         }
-        public void DeleteProduct(string makat)
+        public bool DeleteProduct(string makat)
         {
-            foreach(Product p in products)
-            {
-                if(p.Makat == makat)
-                    products.Remove(p);
-            }
+            return false;
+
         }
     }
 }
