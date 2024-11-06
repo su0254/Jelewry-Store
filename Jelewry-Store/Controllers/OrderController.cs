@@ -22,17 +22,18 @@ namespace Jelewry_Store.Controllers
             List<Order> orders = orderServices.GetAllOrders();
             if (orders == null)
                 return NotFound();
-            return Ok(orders);
+            return orders;
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{orderCode}")]
         public ActionResult<Order> Get(int orderCode)
         {
+            if (orderCode < 0) return BadRequest();
             Order order = orderServices.GetOrderById(orderCode);
             if (order == null)
                 return NotFound();
-            return Ok(order);
+            return order;
         }
 
         // POST api/<OrderController>
@@ -47,6 +48,7 @@ namespace Jelewry_Store.Controllers
         [HttpPut("{orderCode}")]
         public ActionResult Put(int orderCode, [FromBody] Order order)
         {
+            if (orderCode < 0) return BadRequest();
             Order o = orderServices.GetOrderById(orderCode);
             if (order == null)
                 return NotFound();
@@ -58,6 +60,7 @@ namespace Jelewry_Store.Controllers
         [HttpDelete("{orderCode}")]
         public ActionResult Delete(int orderCode)
         {
+            if (orderCode < 0) return BadRequest();
             Order o = orderServices.GetOrderById(orderCode);
             if (o == null)
                 return NotFound();

@@ -4,15 +4,15 @@ namespace Jelewry_Store.Services
 {
     public class BranchServices
     {
-        static List<Branch> branches = new List<Branch>();
+        
         static int id = 1;
         public List<Branch> GetAllBranches()
         {
-            return branches;
+            return DataContextManager.Manager.Branches;
         }
         public Branch GetBranchByCode(int codeBranch)
         {
-            foreach (var branch in branches)
+            foreach (var branch in DataContextManager.Manager.Branches)
             {
                 if (branch.CodeBranch == codeBranch)
                     return branch;
@@ -23,13 +23,13 @@ namespace Jelewry_Store.Services
         {
             if(branch == null) return false;
             branch.Id = id++;
-            branches.Add(branch);
+            DataContextManager.Manager.Branches.Add(branch);
             return true;
         }
         public bool PutBranch(int codeBranch, Branch branch)
         {
             if (branch == null) return false;
-            Branch b = branches.Find(b => b.CodeBranch == codeBranch);
+            Branch b = DataContextManager.Manager.Branches.Find(b => b.CodeBranch == codeBranch);
             b.CodeManager=branch.CodeManager;
             b.CodeBranch = codeBranch;
             b.Adress=branch.Adress;
@@ -41,11 +41,11 @@ namespace Jelewry_Store.Services
         }
         public void DeleteSending(int codeBranch)
         {
-            foreach (var branch in branches)
+            foreach (var branch in DataContextManager.Manager.Branches)
             {
                 if (branch.CodeBranch == codeBranch)
                 {
-                    branches.Remove(branch);
+                    DataContextManager.Manager.Branches.Remove(branch);
                     return;
                 }
             }

@@ -23,17 +23,18 @@ namespace Jelewry_Store.Controllers
             List<Product> products = productServices.GetAllProducts();
             if(products == null)
                 return NotFound();
-            return Ok(products);
+            return products;
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{makat}")]
         public ActionResult<Product> Get(string makat)
         {
+            if(makat == null) return NotFound();    
             Product product=productServices.GetProductById(makat);
             if (product == null)
                 return NotFound();
-            return Ok(product);
+            return product;
         }
 
         // POST api/<ProductController>
@@ -48,11 +49,12 @@ namespace Jelewry_Store.Controllers
         [HttpPut("{makat}")]
         public ActionResult Put(string makat, [FromBody] Product product)
         {
+            if(makat == null) return NotFound();
             Product p = productServices.GetProductById(makat);
             if(p==null)
                 return NotFound();
-            productServices.PutProduct(makat, p);
-            return Ok(p);
+            productServices.PutProduct(makat, product);
+            return Ok();
 
         }
 
@@ -60,11 +62,12 @@ namespace Jelewry_Store.Controllers
         [HttpDelete("{makat}")]
         public ActionResult Delete(string makat)
         {
+            if(makat == null) return NotFound();
             Product p = productServices.GetProductById(makat);
             if (p == null)
                 return NotFound();
             productServices.DeleteProduct(makat);
-            return Ok(p);
+            return Ok();
         }
     }
 }

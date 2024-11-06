@@ -4,16 +4,16 @@ namespace Jelewry_Store.Services
 {
     public class OrderServices
     {
+        
         static int id = 1;
-        static List<Order> orders = new List<Order>();
-
+        
         public List<Order> GetAllOrders()
         {
-            return orders;
+            return DataContextManager.Manager.Orders;
         }
         public Order GetOrderById(int orderCode)
         {
-            foreach (var order in orders)
+            foreach (var order in DataContextManager.Manager.Orders)
             {
                 if(order.OrderCode == orderCode)
                     return order;
@@ -24,13 +24,13 @@ namespace Jelewry_Store.Services
         {
             if (order == null) return false;
             order.Id = id++;
-            orders.Add(order);
+            DataContextManager.Manager.Orders.Add(order);
             return true;
         }
         public bool PutOrder(int orderCode, Order order)
         {
             if (order == null) return false;
-           Order o=orders.Find(o=>o.OrderCode == orderCode);
+           Order o= DataContextManager.Manager.Orders.Find(o=>o.OrderCode == orderCode);
             o.UserId = order.UserId;
             o.OrderDate = order.OrderDate;
             o.IsExsist = order.IsExsist;
@@ -43,11 +43,11 @@ namespace Jelewry_Store.Services
         }
         public void DeleteOrder(int orderCode)
         {
-            foreach(var order in orders)
+            foreach(var order in DataContextManager.Manager.Orders)
             {
                 if (order.OrderCode == orderCode)
                 {
-                    orders.Remove(order);
+                    DataContextManager.Manager.Orders.Remove(order);
                     return;
                 }
             }

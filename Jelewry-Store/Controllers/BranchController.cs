@@ -22,17 +22,18 @@ namespace Jelewry_Store.Controllers
             List<Branch> branches = branchServices.GetAllBranches();
             if (branches == null)
                 return NotFound();
-            return Ok(branches);
+            return branches;
         }
 
         // GET api/<BranchController>/5
         [HttpGet("{codeBranch}")]
         public ActionResult<Branch> Get(int codeBranch)
         {
+            if(codeBranch < 0) return BadRequest();
             Branch branch= branchServices.GetBranchByCode(codeBranch);
             if(branch == null)
                 return NotFound();
-            return Ok(branch);
+            return branch;
         }
 
         // POST api/<BranchController>
@@ -47,6 +48,7 @@ namespace Jelewry_Store.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int codeBranch, [FromBody] Branch branch)
         {
+            if (codeBranch < 0) return BadRequest();
             Branch s = branchServices.GetBranchByCode(codeBranch);
             if (s == null)
                 return NotFound();
@@ -58,6 +60,7 @@ namespace Jelewry_Store.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int codeBranch)
         {
+            if (codeBranch < 0) return BadRequest();
             Branch s = branchServices.GetBranchByCode(codeBranch);
             if (s == null)
                 return NotFound();

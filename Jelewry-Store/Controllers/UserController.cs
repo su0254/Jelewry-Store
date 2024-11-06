@@ -23,16 +23,17 @@ namespace Jelewry_Store.Controllers
             List<User> users = services.GetAllUser();
             if(users==null)
                 return NotFound();
-            return Ok(users);
+            return users;
         }
 
         // GET api/<UserController>/5
         [HttpGet("{Makat}")]
-        public ActionResult<User> Get(string id)
+        public ActionResult<User> Get(string tz)
         {
-            User user = services.GetUserById(id);
+           if(tz==null) BadRequest();
+            User user = services.GetUserById(tz);
             if(user==null) return NotFound();
-            return Ok(user);
+            return user;
         }
 
         // POST api/<UserController>
@@ -45,23 +46,25 @@ namespace Jelewry_Store.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(string id, [FromBody] User user)
+        public ActionResult Put(string tz, [FromBody] User user)
         {
-            User u = services.GetUserById(id);
+            if(tz==null) BadRequest();
+            User u = services.GetUserById(tz);
             if(u==null) 
                 return NotFound();
-            services.PutUser(id, user);
+            services.PutUser(tz, user);
             return Ok();
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string tz)
         {
-            User u = services.GetUserById(id);
+            if (tz==null) BadRequest();
+            User u = services.GetUserById(tz);
             if (u == null) 
                 return NotFound();
-            services.DeleteUser(id);
+            services.DeleteUser(tz);
             return Ok();
         }
     }

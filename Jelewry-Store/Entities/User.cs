@@ -15,18 +15,5 @@ namespace Jelewry_Store.Entities
         public DateTime BirthDay { get; set; }
         public Status EStatus { get; set; }
 
-        public User(int code, string id, string name, string? email, string phoneNumber, string city, string address, string? zipCode, DateTime birthDay, Status status)
-        {
-            Code = code;
-            Id = id;
-            Name = name;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            City = city;
-            Address = address;
-            ZipCode = zipCode;
-            BirthDay = birthDay;
-            EStatus = status;
-        }
     }
 }

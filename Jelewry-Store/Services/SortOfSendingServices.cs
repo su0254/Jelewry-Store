@@ -1,20 +1,20 @@
 ﻿using Jelewry_Store.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Jelewry_Store.Services
 {
     public class SortOfSendingServices
     {
-
+        
         static int id = 1;
-        static List<SortOfSending> sortsOfSending = new List<SortOfSending>();
 
         public List<SortOfSending> GetAllSendings()
         {
-            return sortsOfSending;
+            return DataContextManager.Manager.SortOfSendings;
         }
-        public SortOfSending GetSendingByCode(int sendingCode)
+        public SortOfSending GetSendingByCode(string sendingCode)
         {
-            foreach (var sortOfSending in sortsOfSending)
+            foreach (var sortOfSending in DataContextManager.Manager.SortOfSendings)
             {
                 if (sortOfSending.SendingCode == sendingCode)
                     return sortOfSending;
@@ -24,23 +24,28 @@ namespace Jelewry_Store.Services
         public void AddSending(SortOfSending sending)
         {
             sending.Id = id++;
-            sortsOfSending.Add(sending);
+            DataContextManager.Manager.SortOfSendings.Add(sending);
         }
-        public void PutSending(int sendingCode, SortOfSending sending)
+        public bool PutSending(string sendingCode, SortOfSending sending)
         {
-            for (int i = 0; i < sortsOfSending.Count(); i++)
-            {
-                if (sortsOfSending[i].SendingCode == sendingCode)
-                    sortsOfSending[i] = sending;
-            }
+            if(sending == null) return false;
+            SortOfSending s=DataContextManager.Manager.SortOfSendings.Find((s)=>s.SendingCode == sendingCode);
+            s.SendingCode = sendingCode;
+            s.DescraptionSending = sending.DescraptionSending;
+            s.Price= sending.Price;
+            s.NumOfDays = sending.NumOfDays;
+            s.EAreas = sending.EAreas;
+            s.MaxItem= sending.MaxItem;
+            s.Conditions = sending.Conditions;
+            return true;
         }
-        public void DeleteSending(int sendingCode)
+        public void DeleteSending(string sendingCode)
         {
-            foreach (var sending in sortsOfSending)
+            foreach (var sending in DataContextManager.Manager.SortOfSendings)
             {
                 if (sending.SendingCode == sendingCode)
                 {
-                    sortsOfSending.Remove(sending);
+                    DataContextManager.Manager.SortOfSendings.Remove(sending);
                     return;
                 }
             }

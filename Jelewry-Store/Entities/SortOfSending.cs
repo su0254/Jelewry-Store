@@ -6,7 +6,7 @@
     public class SortOfSending
     {
         public int Id { get; set; }
-        public int SendingCode { get; set; }
+        public string SendingCode { get; set; }
         public SortsSending DescraptionSending { get; set;}
         public int NumOfDays { get; set; }
         public Areas EAreas { get; set; }
