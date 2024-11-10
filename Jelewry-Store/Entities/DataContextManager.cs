@@ -2,6 +2,6 @@
 {
     public class DataContextManager
     {
-        public static DataContext Manager { get;  set; }
+        public static DataContext Manager { get;  set; }=new DataContext();
     }
 }

@@ -1,11 +1,12 @@
-﻿using Jelewry_Store.;
+﻿
 using Jelewry_Store.Entities;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace Jelewry_Store.Services
 {
     public class UserServices
     {
+        ErrorTZ error = ErrorTZ.OK;
         TzValid tzvalid=new TzValid();
         static int id = 1;
 
@@ -16,18 +17,13 @@ namespace Jelewry_Store.Services
 
         public User GetUserById(string tz)
         {
-            
-            foreach (var user in DataContextManager.Manager.Users)
-            {
-                if (user.Tz == tz)
-                    return user;
-            }
-            return null;
+            if (DataContextManager.Manager.Users == null) return null;
+            return DataContextManager.Manager.Users.Find((u) => u.Tz == tz);
         }
 
         public bool PostUser(User user)
         {
-            ErrorTZ error = ErrorTZ.OK;
+            if(user == null) return false;  
             tzvalid.ISOK(user.Tz, out error);
             if(error != ErrorTZ.OK) 
                 return false;
@@ -38,8 +34,7 @@ namespace Jelewry_Store.Services
 
         public bool PutUser(string tz, User u)
         {
-            ErrorTZ error = ErrorTZ.OK;
-            tzvalid.ISOK(u.Tz, out error);
+            tzvalid.ISOK(tz, out error);
             if (error != ErrorTZ.OK)
                 return false;
             User user=DataContextManager.Manager.Users.Find((user) => user.Tz == tz);
@@ -56,16 +51,12 @@ namespace Jelewry_Store.Services
             return true;
         }
 
-        public void DeleteUser(string tz)
+        public bool DeleteUser(string tz)
         {
-            foreach (var user in DataContextManager.Manager.Users)
-            {
-                if (user.Tz == tz)
-                {
-                    DataContextManager.Manager.Users.Remove(user);
-                    return;
-                }
-            }
+            User u = DataContextManager.Manager.Users.Find((u)=>u.Tz == tz);
+            if(u == null) return false;
+            DataContextManager.Manager.Users.Remove(u);
+            return true;
         }
     }
 }

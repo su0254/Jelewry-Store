@@ -12,12 +12,8 @@ namespace Jelewry_Store.Services
         }
         public Branch GetBranchByCode(int codeBranch)
         {
-            foreach (var branch in DataContextManager.Manager.Branches)
-            {
-                if (branch.CodeBranch == codeBranch)
-                    return branch;
-            }
-            return null;
+            if (DataContextManager.Manager.Users == null) return null;
+            return DataContextManager.Manager.Branches.Find((b) => b.CodeBranch == codeBranch);
         }
         public bool AddBranch(Branch branch)
         {
@@ -39,16 +35,12 @@ namespace Jelewry_Store.Services
             b.Close=branch.Close;
             return true;
         }
-        public void DeleteSending(int codeBranch)
+        public bool DeleteSending(int codeBranch)
         {
-            foreach (var branch in DataContextManager.Manager.Branches)
-            {
-                if (branch.CodeBranch == codeBranch)
-                {
-                    DataContextManager.Manager.Branches.Remove(branch);
-                    return;
-                }
-            }
+            Branch b = DataContextManager.Manager.Branches.Find((b) => b.CodeBranch == codeBranch);
+            if (b == null) return false;
+            DataContextManager.Manager.Branches.Remove(b);
+            return true;
         }
     }
 }

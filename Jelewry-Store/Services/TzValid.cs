@@ -13,6 +13,12 @@ namespace Jelewry_Store.Services
         public TzValid() { }
         public bool ISOK(string idTZ, out ErrorTZ error)
         {
+            if (idTZ == null)
+            {
+                error = ErrorTZ.LanghtNotValid;
+                return false;
+            }
+            
             if (idTZ.Length != 9)
             {
                 error = ErrorTZ.LanghtNotValid;

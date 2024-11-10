@@ -37,32 +37,32 @@ namespace Jelewry_Store.Controllers
 
         // POST api/<SortOfSendingController>
         [HttpPost]
-        public ActionResult Post([FromBody] SortOfSending sending)
+        public ActionResult<bool> Post([FromBody] SortOfSending sending)
         {
             sendings.AddSending(sending);
-            return Ok();
+            return true;
         }
 
         // PUT api/<SortOfSendingController>/5
         [HttpPut("{sendingCode}")]
-        public ActionResult Put(string sendingCode, [FromBody] SortOfSending sending)
+        public ActionResult<bool> Put(string sendingCode, [FromBody] SortOfSending sending)
         {
             SortOfSending s = sendings.GetSendingByCode(sendingCode);
             if(s == null)
                 return NotFound();
             sendings.PutSending(sendingCode, s);
-            return Ok();
+            return true;
         }
 
         // DELETE api/<SortOfSendingController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string sendingCode)
+        public ActionResult<bool> Delete(string sendingCode)
         {
             SortOfSending sending = sendings.GetSendingByCode(sendingCode);
             if(sending == null)
                 return NotFound();
             sendings.DeleteSending(sendingCode);
-            return Ok();
+            return true;
         }
     }
 }

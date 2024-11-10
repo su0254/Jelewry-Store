@@ -14,12 +14,8 @@ namespace Jelewry_Store.Services
         }
         public SortOfSending GetSendingByCode(string sendingCode)
         {
-            foreach (var sortOfSending in DataContextManager.Manager.SortOfSendings)
-            {
-                if (sortOfSending.SendingCode == sendingCode)
-                    return sortOfSending;
-            }
-            return null;
+            if (DataContextManager.Manager.SortOfSendings == null) return null;
+            return DataContextManager.Manager.SortOfSendings.Find((s) => s.SendingCode == sendingCode);
         }
         public void AddSending(SortOfSending sending)
         {
@@ -39,16 +35,12 @@ namespace Jelewry_Store.Services
             s.Conditions = sending.Conditions;
             return true;
         }
-        public void DeleteSending(string sendingCode)
+        public bool DeleteSending(string sendingCode)
         {
-            foreach (var sending in DataContextManager.Manager.SortOfSendings)
-            {
-                if (sending.SendingCode == sendingCode)
-                {
-                    DataContextManager.Manager.SortOfSendings.Remove(sending);
-                    return;
-                }
-            }
+            SortOfSending s = DataContextManager.Manager.SortOfSendings.Find((s) => s.SendingCode == sendingCode);
+            if (s == null) return false;
+            DataContextManager.Manager.SortOfSendings.Remove(s);
+            return true;
         }
     }
 }

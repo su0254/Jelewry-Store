@@ -38,34 +38,34 @@ namespace Jelewry_Store.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public ActionResult Post([FromBody] User user)
+        public ActionResult<bool> Post([FromBody] User user)
         {
             services.PostUser(user);
-            return Ok();
+            return true;
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(string tz, [FromBody] User user)
+        public ActionResult<bool> Put(string tz, [FromBody] User user)
         {
             if(tz==null) BadRequest();
             User u = services.GetUserById(tz);
             if(u==null) 
-                return NotFound();
+                return NotFound(false);
             services.PutUser(tz, user);
-            return Ok();
+            return true;
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string tz)
+        public ActionResult<bool> Delete(string tz)
         {
             if (tz==null) BadRequest();
             User u = services.GetUserById(tz);
             if (u == null) 
-                return NotFound();
+                return NotFound(false);
             services.DeleteUser(tz);
-            return Ok();
+            return true;
         }
     }
 }

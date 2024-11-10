@@ -8,5 +8,6 @@
         public List<ProductInOrder> ProductInOrders { get; set; } = new List<ProductInOrder>();
         public List<SortOfSending> SortOfSendings { get; set; } = new List<SortOfSending>();
         public List<User> Users { get; set; } = new List<User>();
+       
     }
 }

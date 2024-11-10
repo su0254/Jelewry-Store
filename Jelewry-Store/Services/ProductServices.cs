@@ -16,12 +16,8 @@ namespace Jelewry_Store.Services
         }
         public Product GetProductById(string makat)
         {
-            foreach (Product p in DataContextManager.Manager.Products)
-            {
-                if (p.Makat == makat) 
-                    return p;
-            }
-            return null;
+            if (DataContextManager.Manager.Products == null) return null;
+            return DataContextManager.Manager.Products.Find((p) => p.Makat == makat);
         }
         public bool PostProduct(Product p)
         {
@@ -45,7 +41,10 @@ namespace Jelewry_Store.Services
         }
         public bool DeleteProduct(string makat)
         {
-            return false;
+            Product p = DataContextManager.Manager.Products.Find((p) => p.Makat == makat);
+            if (p == null) return false;
+            DataContextManager.Manager.Branches.Remove(p);
+            return true;
 
         }
     }

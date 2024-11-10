@@ -13,12 +13,8 @@ namespace Jelewry_Store.Services
         }
         public Order GetOrderById(int orderCode)
         {
-            foreach (var order in DataContextManager.Manager.Orders)
-            {
-                if(order.OrderCode == orderCode)
-                    return order;
-            }
-            return null;
+            if (DataContextManager.Manager.Orders == null) return null;
+            return DataContextManager.Manager.Orders.Find((o) => o.OrderCode == orderCode);
         }
         public bool AddOrder(Order order)
         {
@@ -41,16 +37,12 @@ namespace Jelewry_Store.Services
             return true;
             
         }
-        public void DeleteOrder(int orderCode)
+        public bool DeleteOrder(int orderCode)
         {
-            foreach(var order in DataContextManager.Manager.Orders)
-            {
-                if (order.OrderCode == orderCode)
-                {
-                    DataContextManager.Manager.Orders.Remove(order);
-                    return;
-                }
-            }
+            Order o = DataContextManager.Manager.Orders.Find((o) => o.OrderCode == orderCode);
+            if (o == null) return false;
+            DataContextManager.Manager.Orders.Remove(o);
+            return true;
         }
     }
 }

@@ -39,35 +39,35 @@ namespace Jelewry_Store.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public ActionResult Post([FromBody] Product product)
+        public ActionResult<bool> Post([FromBody] Product product)
         {
             productServices.PostProduct(product);
-            return Ok();
+            return true;
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{makat}")]
-        public ActionResult Put(string makat, [FromBody] Product product)
+        public ActionResult<bool> Put(string makat, [FromBody] Product product)
         {
             if(makat == null) return NotFound();
             Product p = productServices.GetProductById(makat);
             if(p==null)
                 return NotFound();
             productServices.PutProduct(makat, product);
-            return Ok();
+            return true;
 
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{makat}")]
-        public ActionResult Delete(string makat)
+        public ActionResult<bool> Delete(string makat)
         {
             if(makat == null) return NotFound();
             Product p = productServices.GetProductById(makat);
             if (p == null)
                 return NotFound();
             productServices.DeleteProduct(makat);
-            return Ok();
+            return true;
         }
     }
 }

@@ -38,34 +38,34 @@ namespace Jelewry_Store.Controllers
 
         // POST api/<OrderController>
         [HttpPost]
-        public ActionResult Post([FromBody] Order order)
+        public ActionResult<bool> Post([FromBody] Order order)
         {
             orderServices.AddOrder(order);
-            return Ok();
+            return true;
         }
 
         // PUT api/<OrderController>/5
         [HttpPut("{orderCode}")]
-        public ActionResult Put(int orderCode, [FromBody] Order order)
+        public ActionResult<bool> Put(int orderCode, [FromBody] Order order)
         {
             if (orderCode < 0) return BadRequest();
             Order o = orderServices.GetOrderById(orderCode);
             if (order == null)
                 return NotFound();
             orderServices.PutOrder(orderCode, order);
-            return Ok();
+            return true;
         }
 
         // DELETE api/<OrderController>/5
         [HttpDelete("{orderCode}")]
-        public ActionResult Delete(int orderCode)
+        public ActionResult<bool> Delete(int orderCode)
         {
             if (orderCode < 0) return BadRequest();
             Order o = orderServices.GetOrderById(orderCode);
             if (o == null)
                 return NotFound();
             orderServices.DeleteOrder(orderCode);
-            return Ok();
+            return true;
         }
     }
 }
