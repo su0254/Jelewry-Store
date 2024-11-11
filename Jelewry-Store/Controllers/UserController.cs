@@ -30,7 +30,7 @@ namespace Jelewry_Store.Controllers
         [HttpGet("{Makat}")]
         public ActionResult<User> Get(string tz)
         {
-           if(tz==null) BadRequest();
+            if(tz==null) BadRequest();
             User user = services.GetUserById(tz);
             if(user==null) return NotFound();
             return user;

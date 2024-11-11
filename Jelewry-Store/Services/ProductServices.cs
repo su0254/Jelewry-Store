@@ -9,7 +9,6 @@ namespace Jelewry_Store.Services
         {
             
         }
-        
         public List<Product> GetAllProducts()
         {
             return DataContextManager.Manager.Products;
@@ -43,7 +42,7 @@ namespace Jelewry_Store.Services
         {
             Product p = DataContextManager.Manager.Products.Find((p) => p.Makat == makat);
             if (p == null) return false;
-            DataContextManager.Manager.Branches.Remove(p);
+            DataContextManager.Manager.Products.Remove(p);
             return true;
 
         }

@@ -4,7 +4,6 @@
     public enum SortsOfSending { BYSHOP, BYHOME, EXPRESE }
     public class Order
     {
-        static int id = 1;
         public int Id { get; set; }
         public int OrderCode { get; set; }
         public int UserId { get; set; }

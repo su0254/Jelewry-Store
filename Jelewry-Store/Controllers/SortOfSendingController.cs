@@ -29,6 +29,7 @@ namespace Jelewry_Store.Controllers
         [HttpGet("{sendingCode}")]
         public ActionResult<SortOfSending> Get(string sendingCode)
         {
+            if (sendingCode == null) BadRequest();
             SortOfSending sending = sendings.GetSendingByCode(sendingCode);
             if (sending == null)
                 return NotFound();
@@ -47,6 +48,7 @@ namespace Jelewry_Store.Controllers
         [HttpPut("{sendingCode}")]
         public ActionResult<bool> Put(string sendingCode, [FromBody] SortOfSending sending)
         {
+            if (sendingCode == null) BadRequest();
             SortOfSending s = sendings.GetSendingByCode(sendingCode);
             if(s == null)
                 return NotFound();
@@ -58,6 +60,7 @@ namespace Jelewry_Store.Controllers
         [HttpDelete("{id}")]
         public ActionResult<bool> Delete(string sendingCode)
         {
+            if (sendingCode == null) BadRequest();
             SortOfSending sending = sendings.GetSendingByCode(sendingCode);
             if(sending == null)
                 return NotFound();

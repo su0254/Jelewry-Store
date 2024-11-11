@@ -30,7 +30,7 @@ namespace Jelewry_Store.Controllers
         [HttpGet("{makat}")]
         public ActionResult<Product> Get(string makat)
         {
-            if(makat == null) return NotFound();    
+            if(makat == null) return BadRequest();    
             Product product=productServices.GetProductById(makat);
             if (product == null)
                 return NotFound();
@@ -49,7 +49,7 @@ namespace Jelewry_Store.Controllers
         [HttpPut("{makat}")]
         public ActionResult<bool> Put(string makat, [FromBody] Product product)
         {
-            if(makat == null) return NotFound();
+            if(makat == null) return BadRequest();
             Product p = productServices.GetProductById(makat);
             if(p==null)
                 return NotFound();
@@ -62,7 +62,7 @@ namespace Jelewry_Store.Controllers
         [HttpDelete("{makat}")]
         public ActionResult<bool> Delete(string makat)
         {
-            if(makat == null) return NotFound();
+            if(makat == null) return BadRequest();
             Product p = productServices.GetProductById(makat);
             if (p == null)
                 return NotFound();

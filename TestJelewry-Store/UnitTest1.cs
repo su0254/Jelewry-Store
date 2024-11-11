@@ -12,33 +12,51 @@ namespace TestJelewry_Store
         {
             var user = new UserController();
             var result = user.Get();
-            Assert.Equal(0, result.Value.Count);
+            Assert.Equal(1, result.Value.Count);
         }
         [Fact]
         public void GetById_ReturnsOk()
         {
             //Arrange
-            var id = "3277";
-
+            var id = "327774881";
             //Act
             var user = new UserController();
             var result = user.Get(id);
-
             //Assert
-            Assert.True(result.Value is User || result.Value == null);
+            Assert.IsType<User>(result.Value);
         }
         [Fact]
-        public void PostUser_ReturnFalse()
+        public void GetById_ReturnsNotFoundTz()
+        {
+            //Arrange
+            var tz = "32777";
+            //Act
+            var user = new UserController();
+            var result = user.Get(tz);
+            //Assert
+            Assert.Null(result.Value);
+        }
+        [Fact]
+        public void GetById_ReturnsBadRequest()
+        {
+            //Arrange
+            string tz=null ;
+            //Act
+            var user = new UserController();
+            var result = user.Get(tz);
+            //Assert
+            Assert.Null(result.Value);
+        }
+        [Fact]
+        public void PostUser_ReturnTrue()
         {
             //Arrange
             var u = new User();
-
             //Act
             var user = new UserController();
             var result = user.Post(u);
-
             //Assert
-            Assert.True(!result.Value);
+            Assert.True(result.Value);
         }
 
         [Fact]
@@ -48,17 +66,63 @@ namespace TestJelewry_Store
             var u = new User();
             var user = new UserController();
             var result = user.Put(tz, u);
-            Assert.True(!result.Value);
+            Assert.True(result.Value);
+        }
+        [Fact]
+        public void UpdateUser_ReturnsNotFound()
+        {
+            //Arrange
+            var tz = "32777";
+            User u = new User();
+            //Act
+            var user = new UserController();
+            var result = user.Put(tz,u);
+            //Assert
+            Assert.False(result.Value);
         }
 
         [Fact]
-        public void DeleteUser_ReturnFalse()
+        public void UpdateUser_ReturnsBadRequest()
         {
-            var tz = "1234";
-            var u = new User();
+            //Arrange
+            string tz = null;
+            User u = new User();
+            //Act
+            var user = new UserController();
+            var result = user.Put(tz,u);
+            //Assert
+            Assert.False(result.Value);
+        }
+
+        [Fact]
+        public void DeleteUser_ReturnTrue()
+        {
+            var tz = "327774881";
             var user = new UserController();
             var result = user.Delete(tz);
-            Assert.True(!result.Value);
+            Assert.True(result.Value);
+        }
+        [Fact]
+        public void DeleteUser_ReturnsNotFoundTz()
+        {
+            //Arrange
+            var tz = "32777";
+            //Act
+            var user = new UserController();
+            var result = user.Delete(tz);
+            //Assert
+            Assert.False(result.Value);
+        }
+        [Fact]
+        public void DeleteUser_ReturnsBadRequest()
+        {
+            //Arrange
+            string tz = null;
+            //Act
+            var user = new UserController();
+            var result = user.Delete(tz);
+            //Assert
+            Assert.False(result.Value);
         }
     }
 }
