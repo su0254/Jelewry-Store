@@ -10,7 +10,7 @@ namespace TestJelewry_Store
         [Fact]
         public void GetAllUsers_ReturnsOk()
         {
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Get();
             Assert.Equal(1, result.Value.Count);
         }
@@ -20,7 +20,7 @@ namespace TestJelewry_Store
             //Arrange
             var id = "327774881";
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Get(id);
             //Assert
             Assert.IsType<User>(result.Value);
@@ -31,7 +31,7 @@ namespace TestJelewry_Store
             //Arrange
             var tz = "32777";
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Get(tz);
             //Assert
             Assert.Null(result.Value);
@@ -42,7 +42,7 @@ namespace TestJelewry_Store
             //Arrange
             string tz=null ;
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Get(tz);
             //Assert
             Assert.Null(result.Value);
@@ -53,7 +53,7 @@ namespace TestJelewry_Store
             //Arrange
             var u = new User();
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Post(u);
             //Assert
             Assert.True(result.Value);
@@ -64,7 +64,7 @@ namespace TestJelewry_Store
         {
             var tz = "327774881";
             var u = new User();
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Put(tz, u);
             Assert.True(result.Value);
         }
@@ -75,7 +75,7 @@ namespace TestJelewry_Store
             var tz = "32777";
             User u = new User();
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Put(tz,u);
             //Assert
             Assert.False(result.Value);
@@ -88,7 +88,7 @@ namespace TestJelewry_Store
             string tz = null;
             User u = new User();
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Put(tz,u);
             //Assert
             Assert.False(result.Value);
@@ -98,7 +98,7 @@ namespace TestJelewry_Store
         public void DeleteUser_ReturnTrue()
         {
             var tz = "327774881";
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Delete(tz);
             Assert.True(result.Value);
         }
@@ -108,7 +108,7 @@ namespace TestJelewry_Store
             //Arrange
             var tz = "32777";
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Delete(tz);
             //Assert
             Assert.False(result.Value);
@@ -119,7 +119,7 @@ namespace TestJelewry_Store
             //Arrange
             string tz = null;
             //Act
-            var user = new UserController();
+            var user = new UserController(new UserServices(new FakeContext()));
             var result = user.Delete(tz);
             //Assert
             Assert.False(result.Value);

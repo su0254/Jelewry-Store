@@ -13,7 +13,7 @@ namespace Jelewry_Store.Entities
         public string Address { get; set; }
         public string? ZipCode { get; set; }
         public DateTime BirthDay { get; set; }
-        public Status EStatus { get; set; }
+        public Status? EStatus { get; set; }
 
     }
 }

@@ -9,24 +9,24 @@ namespace Jelewry_Store.Services
         
         public List<Order> GetAllOrders()
         {
-            return DataContextManager.Manager.Orders;
+            return DataContext.Orders;
         }
         public Order GetOrderById(int orderCode)
         {
-            if (DataContextManager.Manager.Orders == null) return null;
-            return DataContextManager.Manager.Orders.Find((o) => o.OrderCode == orderCode);
+            if (DataContext.Orders == null) return null;
+            return DataContext.Orders.Find((o) => o.OrderCode == orderCode);
         }
         public bool AddOrder(Order order)
         {
             if (order == null) return false;
             order.Id = id++;
-            DataContextManager.Manager.Orders.Add(order);
+            DataContext.Orders.Add(order);
             return true;
         }
         public bool PutOrder(int orderCode, Order order)
         {
             if (order == null) return false;
-           Order o= DataContextManager.Manager.Orders.Find(o=>o.OrderCode == orderCode);
+           Order o= DataContext.Orders.Find(o=>o.OrderCode == orderCode);
             o.UserId = order.UserId;
             o.OrderDate = order.OrderDate;
             o.IsExsist = order.IsExsist;
@@ -39,9 +39,9 @@ namespace Jelewry_Store.Services
         }
         public bool DeleteOrder(int orderCode)
         {
-            Order o = DataContextManager.Manager.Orders.Find((o) => o.OrderCode == orderCode);
+            Order o = DataContext.Orders.Find((o) => o.OrderCode == orderCode);
             if (o == null) return false;
-            DataContextManager.Manager.Orders.Remove(o);
+            DataContext.Orders.Remove(o);
             return true;
         }
     }

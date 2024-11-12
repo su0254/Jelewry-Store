@@ -10,28 +10,28 @@ namespace Jelewry_Store.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        readonly UserServices services;
+        readonly UserServices _services;
 
-        public UserController()
+        public UserController(UserServices userServices)
         {
-            services = new UserServices();
+            _services = userServices;
         }
         // GET: api/<UserController>
         [HttpGet]
         public ActionResult<List<User>> Get()
         {
-            List<User> users = services.GetAllUser();
+            List<User> users = _services.GetAllUser();
             if(users==null)
                 return NotFound();
             return users;
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{Makat}")]
+        [HttpGet("{tz}")]
         public ActionResult<User> Get(string tz)
         {
             if(tz==null) BadRequest();
-            User user = services.GetUserById(tz);
+            User user = _services.GetUserById(tz);
             if(user==null) return NotFound();
             return user;
         }
@@ -40,31 +40,31 @@ namespace Jelewry_Store.Controllers
         [HttpPost]
         public ActionResult<bool> Post([FromBody] User user)
         {
-            services.PostUser(user);
+            _services.PostUser(user);
             return true;
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}")]
+        [HttpPut("{tz}")]
         public ActionResult<bool> Put(string tz, [FromBody] User user)
         {
             if(tz==null) BadRequest();
-            User u = services.GetUserById(tz);
+            User u = _services.GetUserById(tz);
             if(u==null) 
                 return NotFound(false);
-            services.PutUser(tz, user);
+            _services.PutUser(tz, user);
             return true;
         }
 
         // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{tz}")]
         public ActionResult<bool> Delete(string tz)
         {
             if (tz==null) BadRequest();
-            User u = services.GetUserById(tz);
+            User u = _services.GetUserById(tz);
             if (u == null) 
                 return NotFound(false);
-            services.DeleteUser(tz);
+            _services.DeleteUser(tz);
             return true;
         }
     }

@@ -11,24 +11,24 @@ namespace Jelewry_Store.Services
         }
         public List<Product> GetAllProducts()
         {
-            return DataContextManager.Manager.Products;
+            return DataContext.Products;
         }
         public Product GetProductById(string makat)
         {
-            if (DataContextManager.Manager.Products == null) return null;
-            return DataContextManager.Manager.Products.Find((p) => p.Makat == makat);
+            if (DataContext.Products == null) return null;
+            return DataContext.Products.Find((p) => p.Makat == makat);
         }
         public bool PostProduct(Product p)
         {
             if (p == null) return false;
             p.Id = id++;
-            DataContextManager.Manager.Products.Add(p);
+            DataContext.Products.Add(p);
             return true;
         }
         public bool PutProduct(string makat,Product p)
         {
             if (p == null) return false;
-            Product product = DataContextManager.Manager.Products.Find(p => p.Makat==makat);
+            Product product = DataContext.Products.Find(p => p.Makat==makat);
             product.Makat = p.Makat;
             product.Description = p.Description;
             product.Price = p.Price;
@@ -40,9 +40,9 @@ namespace Jelewry_Store.Services
         }
         public bool DeleteProduct(string makat)
         {
-            Product p = DataContextManager.Manager.Products.Find((p) => p.Makat == makat);
+            Product p = DataContext.Products.Find((p) => p.Makat == makat);
             if (p == null) return false;
-            DataContextManager.Manager.Products.Remove(p);
+            DataContext.Products.Remove(p);
             return true;
 
         }

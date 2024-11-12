@@ -1,0 +1,51 @@
+[
+  {
+    "Id": 1,
+    "Tz": "327774881",
+    "Name": "John Doe",
+    "Email": "john.doe@example.com",
+    "PhoneNumber": "123-456-7890",
+    "City": "New York",
+    "Address": "123 Main St",
+    "ZipCode": "10001",
+    "BirthDay": "1990-01-15T00:00:00"
+    
+  },
+  {
+    "Id": 2,
+    "Tz": "039845045",
+    "Name": "Jane Smith",
+    "Email": "jane.smith@example.com",
+    "PhoneNumber": "987-654-3210",
+    "City": "Los Angeles",
+    "Address": "456 Elm St",
+    "ZipCode": "90001",
+    "BirthDay": "1985-05-20T00:00:00"
+    
+  },
+  {
+    "Id": 3,
+    "Tz": "066245457",
+    "Name": "Alice Johnson",
+    "Email": "alice.johnson@example.com",
+    "PhoneNumber": "555-555-5555",
+    "City": "Chicago",
+    "Address": "789 Oak St",
+    "ZipCode": "60601",
+    "BirthDay": "1988-09-10T00:00:00"
+    
+  },
+  {
+    "Id": 4,
+    "Tz": "214872475",
+    "Name": "Bob Williams",
+    "Email": "bob.williams@example.com",
+    "PhoneNumber": "222-222-2222",
+    "City": "Houston",
+    "Address": "321 Pine St",
+    "ZipCode": "77002",
+    "BirthDay": "1975-03-25T00:00:00"
+    
+  }
+
+]

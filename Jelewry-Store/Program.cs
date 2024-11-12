@@ -1,7 +1,12 @@
+using Jelewry_Store;
+using Jelewry_Store.Entities;
+using Jelewry_Store.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<IDataContext,DataContext>();
+builder.Services.AddScoped<UserServices>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
